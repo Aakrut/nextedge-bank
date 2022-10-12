@@ -3,14 +3,7 @@ import { useEffect, useState } from "react";
 import { ContractABI } from "../constants/ContractABI";
 
 import { ethers, utils } from "ethers";
-
-const truncateRegex = /^(0x[a-zA-Z0-9]{4})[a-zA-Z0-9]+([a-zA-Z0-9]{4})$/;
-
-const truncateEthAddress = (addr) => {
-  const match = addr?.match(truncateRegex);
-  if (!match) return addr;
-  return `${match[1]}…${match[2]}`;
-};
+import { truncateEthAddress } from "../utils/TruncAddress";
 
 export default function Home() {
   const [isWalletConnected, setIsWalletConnected] = useState(false);
@@ -234,6 +227,10 @@ export default function Home() {
 
   return (
     <div>
+      <Head>
+        <title>NextEdge</title>
+        <link rel="icon" href="/logo.png" />
+      </Head>
       {isWalletConnected ? (
         <main className="main-container font-body">
           <h2 className="headline">
@@ -332,6 +329,10 @@ export default function Home() {
         </main>
       ) : (
         <div className="h-screen w-full font-body">
+          <Head>
+            <title>NextEdge</title>
+            <link rel="icon" href="/logo.png" />
+          </Head>
           <section className="max-w-[1440px] mx-0 my-0 flex items-center justify-center h-full flex-col">
             <div className="flex items-center justify-center flex-col">
               <div className="flex gap-2 my-3">
