@@ -14,10 +14,10 @@ contract Bank {
 
     mapping(address => uint256) public customerToBalance;
 
-    constructor(string _name) {
-        console.log("Bank Name: ",_name)
+    constructor(string memory _name) {
+        console.log("Bank Name: ",_name);
         bankOwner = msg.sender;
-        name = _name;
+        bankName = _name;
     }
 
     // Deposit Money
@@ -40,7 +40,8 @@ contract Bank {
         require(_total <= customerToBalance[msg.sender],"You have insufficient funds to withdraw Money");
 
         customerToBalance[msg.sender] -= _total;
-        
+         (bool sent, ) = _to.call{value: _total}("");
+        require(sent, "Failed to send Ether");
     }
 
     // get My Balance
