@@ -14,16 +14,23 @@ const truncateEthAddress = (addr) => {
 
 export default function Home() {
   const [isWalletConnected, setIsWalletConnected] = useState(false);
+
   const [isBankerOwner, setIsBankerOwner] = useState(false);
+
   const [inputValue, setInputValue] = useState({
     withdraw: "",
     deposit: "",
     bankName: "",
   });
+
   const [bankOwnerAddress, setBankOwnerAddress] = useState(null);
+
   const [customerTotalBalance, setCustomerTotalBalance] = useState(null);
+
   const [currentBankName, setCurrentBankName] = useState(null);
+
   const [customerAddress, setCustomerAddress] = useState(null);
+
   const [error, setError] = useState(null);
 
   const checkIfWalletIsConnected = async () => {
@@ -48,7 +55,6 @@ export default function Home() {
   const getBankName = async () => {
     try {
       if (window.ethereum) {
-        //read data
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         const signer = provider.getSigner();
         const bankContract = new ethers.Contract(
@@ -296,7 +302,7 @@ export default function Home() {
       </section>
       {isBankerOwner && (
         <section className="bank-owner-section">
-          <h2 className="text-xl border-b-2 border-indigo-500 px-10 py-4 font-bold">
+          <h2 className="text-xl border-b-2 border-blue-500 px-10 py-4 font-bold">
             Bank Admin Panel
           </h2>
           <div className="p-10">
